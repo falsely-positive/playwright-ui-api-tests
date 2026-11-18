@@ -24,9 +24,13 @@ export class LoginPage {
             .locator('.oxd-input-field-error-message');
     }
 
-    async pageLoad() {
+    async openPage() {
         await this.page.goto('/web/index.php/auth/login');
         await expect(this.loginButton).toBeVisible();
+    }
+
+    async pageLoaded() {
+        await expect(this.page).toHaveURL(/auth\/login$/);
     }
 
     async enterUsername(username: string): Promise<void> {

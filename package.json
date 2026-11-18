@@ -3,14 +3,27 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "playwright test",
+    "test:demo": "ENV=demo playwright test",
+    "test:local": "ENV=local playwright test",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.65.0",
     "@types/node": "^26.6.6",
-    "dotenv": "^18.0.10"
+    "dotenv": "^18.0.10",
+    "eslint": "^10.15.0",
+    "eslint-plugin-playwright": "^2.12.2",
+    "globals": "^17.14.0",
+    "jiti": "^2.7.0",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.72.2"
   }
 }
