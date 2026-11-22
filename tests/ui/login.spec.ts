@@ -1,5 +1,5 @@
-import { test, expect } from '../fixtures/test';
-import { env } from "../environments";
+import { test, expect } from '../../fixtures/test';
+import { env } from "../../environments";
 
 
 const invalidUser: string = "Invalid credentials";
@@ -17,7 +17,7 @@ test.describe('Login', () => {
       await loginPage.attemptLogin(ADMIN_USER, ADMIN_PASSWORD);
       await dashboardPage.waitForLoaded();
       // The demo site's employee name can be edited by anyone, so only check that a name is shown.
-      // On a site with stable data you could assert the exact value instead
+      // On a site with stable data you could assert the exact value instead.
       const loggedInUser = await dashboardPage.getLoggedInUsersName();
       expect(loggedInUser).not.toBe('');
     })
@@ -40,7 +40,7 @@ test.describe('Login', () => {
 
     test('the username and password fields are cleared after a failed login', async ({ loginPage }) => {
       await loginPage.attemptLogin(ADMIN_USER, 'wrongPassword');
-      // Wait for the failed login to complete; the page reloads with empty fields before the alert is shown.
+      // Waiting for the alert ensures the page has reloaded after the failed login, which clears the fields.
       const errorMessage = await loginPage.getErrorMessage();
       expect(errorMessage).toBe(invalidUser);
 

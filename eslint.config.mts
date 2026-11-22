@@ -18,7 +18,7 @@ export default tseslint.config(
   {
     // Playwright-specific rules, scoped to the test/support code.
     ...playwright.configs["flat/recommended"],
-    files: ["tests/**", "fixtures/**", "pages/**"],
+    files: ["tests/**", "fixtures/**", "pages/**", "api/**"],
       languageOptions: {
         parserOptions: {
           projectService: true,                  // use the project's tsconfig.json for type information

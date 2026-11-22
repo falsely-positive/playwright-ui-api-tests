@@ -1,13 +1,15 @@
 const environments = {
     local: {
         baseURL: "http://localhost:8080",
+        apiURL: "http://localhost:8080",
         users: {
             username: process.env.ADMIN_USER!,
             password: process.env.ADMIN_PASSWORD!,
         },
     },
-    demo: {
+    preprod: {
         baseURL: "https://opensource-demo.orangehrmlive.com",
+        apiURL: "https://petstore.swagger.io",
         users: {
             username: process.env.ADMIN_USER!,
             password: process.env.ADMIN_PASSWORD!,
@@ -17,7 +19,7 @@ const environments = {
 
 type EnvName = keyof typeof environments;
 
-const envName = (process.env.ENV || "demo") as EnvName;
+const envName = (process.env.ENV || "preprod") as EnvName;
 
 if (!environments[envName]) {
     throw new Error(

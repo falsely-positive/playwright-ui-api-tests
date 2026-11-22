@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "playwright test",
-    "test:demo": "ENV=demo playwright test",
-    "test:local": "ENV=local playwright test",
+    "test:api": "playwright test tests/api",
+    "test:ui": "playwright test tests/ui",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
@@ -23,6 +23,7 @@
     "eslint-plugin-playwright": "^2.12.2",
     "globals": "^17.14.0",
     "jiti": "^2.7.0",
+    "lossless-json": "^4.3.3",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.72.2"
   }

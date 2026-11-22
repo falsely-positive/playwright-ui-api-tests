@@ -2,6 +2,24 @@ import { defineConfig, devices } from '@playwright/test';
 import 'dotenv/config';
 import { env } from "./environments";
 
+const uiDir = './tests/ui';
+const apiDir = './tests/api';
+
+/* API tests: no browser or device, run once */
+const apiProjects = [
+  { name: 'api', testDir: apiDir },
+];
+
+/* UI tests: OrangeHRM in each browser */
+const uiProjects = [
+  { name: 'chromium',      testDir: uiDir, use: { ...devices['Desktop Chrome'] } },
+  { name: 'firefox',       testDir: uiDir, use: { ...devices['Desktop Firefox'] } },
+  { name: 'webkit',        testDir: uiDir, use: { ...devices['Desktop Safari'] } },
+  /* Mobile viewports. */
+  { name: 'Mobile Chrome', testDir: uiDir, use: { ...devices['Pixel 9'] } },
+  { name: 'Mobile Safari', testDir: uiDir, use: { ...devices['iPhone 14'] } },
+];
+
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
@@ -16,31 +34,16 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : 2,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+reporter: [['list'], ['html']],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
     baseURL: env.baseURL, 
     headless: !!process.env.CI,
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+   /* Keep a trace and a screenshot for any failed test, so failures can be investigated from the report. */
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure'
   },
 
-  /* Configure projects for major browsers */
-  projects: [
-  { name: "chromium", use: { ...devices["Desktop Chrome"] } },
-  { name: "firefox", use: { ...devices["Desktop Firefox"] } },
-  { name: "webkit", use: { ...devices["Desktop Safari"] } },
-  /* Mobile viewports. */
-  { name: "Mobile Chrome", use: { ...devices["Pixel 9"] } },
-  { name: "Mobile Safari", use: { ...devices["iPhone 14"] } },
-  ],
-
-  /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://localhost:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
+  projects: [...apiProjects, ...uiProjects],
 });

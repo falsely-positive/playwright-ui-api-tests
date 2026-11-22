@@ -1,10 +1,12 @@
 import { test as base, expect } from "@playwright/test";
 import { LoginPage } from "../pages/loginPage";
 import { DashboardPage } from "../pages/dashboardPage"
+import { PetsApi } from "../api/petsAPI"
 
 type MyFixtures = {
     loginPage: LoginPage
     dashboardPage: DashboardPage
+    petsApi: PetsApi
 }
 
 export const test = base.extend<MyFixtures>({
@@ -17,6 +19,10 @@ export const test = base.extend<MyFixtures>({
         const dashboardPage = new DashboardPage(page);
         await use(dashboardPage);
     },
+    petsApi: async({ request }, use ) => {
+        const petsAPI = new PetsApi( request )
+        await use(petsAPI);
+    }
 })
 
 export { expect };
