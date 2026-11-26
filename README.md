@@ -5,6 +5,11 @@ Automated tests written in [Playwright](https://playwright.dev/) with TypeScript
 - **UI:** the [OrangeHRM](https://opensource-demo.orangehrmlive.com/) login page, run in desktop and mobile browsers.
 - **API:** the `POST /pet` endpoint of the [Swagger Petstore](https://petstore.swagger.io/).
 
+## Documentation
+
+- [Test design](TEST_DESIGN.md): the scenarios I chose and why, and further tests in priority order.
+- [Framework overview](FRAMEWORK_OVERVIEW.md): how the framework is structured and the design decisions behind it.
+
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/) 20 or later (the current LTS version is recommended)
